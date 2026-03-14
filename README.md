@@ -10,7 +10,7 @@
 
   **tmdb** - tutaj wrzucona csv **final_tmdb_data.csv** pobrana poprzez API ze strony https://developer.themoviedb.org/docs/getting-started
   Pobrane są te filmy, które łączą się przez tmdbId z filmami w ramce worldWide_imdb_movieLens_merged.csv.
-  Pobierało się to przez API ponad godzine, więc polecam po prostu sobie pobrać tą .csv do siebie, nie wysyłam kodu do pobierania tego
+  **UWAGA** - Pobierało się to przez API ponad godzine, więc polecam po prostu sobie pobrać tą .csv do siebie, nie wysyłam kodu do pobierania tego
   
 
     
