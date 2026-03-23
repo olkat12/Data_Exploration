@@ -4,7 +4,7 @@
    - imdb - dane z IMDB (https://datasets.imdbws.com/)
    - movieLens - dane z Movie Lens (https://grouplens.org/datasets/movielens/latest/)
    - tmdb - dane pobrane ze strony TMDB (https://developer.themoviedb.org/reference/discover-movie)
-   - cpi.xlsx - dane o inflacji w USA w latach 1990-2025 (https://data.bls.gov/timeseries/CUUR0000SA0)
+   - cpi.xlsx - dane o inflacji w USA w latach 1950-2025 (https://data.bls.gov/timeseries/CUUR0000SA0)
    - merged - połączone dane
 
     
@@ -14,7 +14,7 @@
   - imdb_data.ipynb - notatnik, który wczytuje dane IMDB i je przetwarza (plik wynikowy to data/merged/imdb.csv oraz directors_named.csv i writers_named.csv)
   - movieLens.ipynb - przetwarzane i łączone dane z MovieLens (plik wynikowy to data/merged/movieLens.csv)
   - tmdb_loader_from_movieLens.py - skrypt do pobierania danych ze strony TMDB powiązanych ze źródeł movieLens (filmy - tmdb/tmdb_data_from_movieLens.csv, ludzie - tmdb/tmdb_people_movieLens.csv)
-  - tmdb_loader.py - skrypt do pobierania danych ze strony TMDB, które nie znalazły się w bazie MovieLens - pobieranie po 1000 najpopularniejszych filmów z lat 1990-2025, które nie znalazły się w bazie MovieLens (filmy - tmdb/tmdb_data.csv, ludzie - tmdb/tmdb_people.csv)
+  - tmdb_loader.py - skrypt do pobierania danych ze strony TMDB, które nie znalazły się w bazie MovieLens - pobieranie po 1-2 tys. najpopularniejszych filmów z lat 1950-2025, które nie znalazły się w bazie MovieLens (filmy - tmdb/tmdb_data.csv, ludzie - tmdb/tmdb_people.csv)
   - data_merge.ipynb - łączenie danych TMDB o filmach i ludziach, movieLens oraz o inflacji, wstępne przetwarzanie (plik wynikowy to merged/merged_data.csv)
 
 Jakie info mamy pobrane przez tmdb:
@@ -22,9 +22,9 @@ Jakie info mamy pobrane przez tmdb:
 
 ### Uwagi
 - dane z IMDB pokrywają się z danymi MovieLens oraz TMDB, dlatego nie są używane
-- wybrane zostały filmy z lat 1990-2025
+- wybrane zostały filmy z lat 1950-2025
 - dane pieniężne (budget i revenue) zostały ujednolicone pod względem inflacji z 2025 roku
-- w sumie wszystkich filmów jest ponad 74 tys., jednak ze znanym przychodem jest tylko ok. 14 tys. ...
+- w sumie wszystkich filmów jest ponad 415 tys., jednak ze znanym przychodem jest tylko ok. 20 tys. ...
 
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``

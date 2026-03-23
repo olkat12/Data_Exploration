@@ -4,7 +4,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
 current = pd.read_csv("../data/merged/movieLens.csv")
-tmdb_ids = current[current['year'] >= 1990]['tmdbId'].dropna().unique()
+tmdb_ids = current['tmdbId'].dropna().unique()
 
 API_KEY = ''  # tu trzeba wkleic klucz z dostepu ktory otrzymuje sie na stronie
 
@@ -82,7 +82,7 @@ def fetch_movie_details(tmdb_id):
     return movie_dict, people_list
 
 
-def get_movie_data(date_from, date_to, max_movies=500):
+def get_movie_data(date_from, date_to, max_movies=2000):
     results_temp = []
     people_temp = []
 
@@ -130,15 +130,22 @@ def get_movie_data(date_from, date_to, max_movies=500):
     return results_temp, people_temp
 
 
-for year in range(1990, 2026):
+for year in range(1950, 2026):
     print(f"Rok: {year}")
-    movies_temp1, people_temp1 = get_movie_data(f'{year}-01-01', f'{year}-06-30')
-    movies_temp2, people_temp2 = get_movie_data(f'{year}-07-01', f'{year}-12-31')
+    movies_temp1, people_temp1 = get_movie_data(f'{year}-01-01', f'{year}-03-31')
+    movies_temp2, people_temp2 = get_movie_data(f'{year}-01-04', f'{year}-06-30')
+    movies_temp3, people_temp3 = get_movie_data(f'{year}-07-01', f'{year}-09-30')
+    movies_temp4, people_temp4 = get_movie_data(f'{year}-10-01', f'{year}-12-31')
 
     movies.extend(movies_temp1)
     movies.extend(movies_temp2)
+    movies.extend(movies_temp3)
+    movies.extend(movies_temp4)
+
     people.extend(people_temp1)
     people.extend(people_temp2)
+    people.extend(people_temp3)
+    people.extend(people_temp4)
 
 tmdb_movies_df = pd.DataFrame(movies)
 tmdb_movies_df.to_csv('../data/tmdb/tmdb_data.csv', index=False)
