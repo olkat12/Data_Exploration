@@ -20,11 +20,11 @@
 Jakie info mamy pobrane przez tmdb:
 'title', 'budget', 'revenue', 'release_date', 'runtime', 'original_language', 'popularity', 'vote_average', 'vote_count', 'genres, 'origin_countries', 'spoken_languages', 'directors', 'writers', 'cast', 'keywords'
 
-Uwagi
+### Uwagi
 - dane z IMDB pokrywają się z danymi MovieLens oraz TMDB, dlatego nie są używane
 - wybrane zostały filmy z lat 1990-2025
 - dane pieniężne (budget i revenue) zostały ujednolicone pod względem inflacji z 2025 roku
-- w sumie wszstkich filmów jest ponad 74 tys., jednak ze znanym przychodem jest tylko ok 14 tys. ...
+- w sumie wszystkich filmów jest ponad 74 tys., jednak ze znanym przychodem jest tylko ok. 14 tys. ...
 
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``
