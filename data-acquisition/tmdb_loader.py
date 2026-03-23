@@ -110,9 +110,8 @@ def get_movie_data(date_from, date_to, max_movies=500):
             if total_pages == 1000:
                 total_pages = discover_data.get("total_pages", 1)
 
-            tmdb_ids_batch = [m['id'] for m in discover_data.get('results', [])]
+            tmdb_ids_batch = [m['id'] for m in discover_data.get('results', []) if m['id'] not in tmdb_ids]
 
-            # ThreadPoolExecutor do równoległego pobierania szczegółów filmów
             with ThreadPoolExecutor(max_workers=5) as executor:
                 futures = {executor.submit(fetch_movie_details, tmdb_id): tmdb_id for tmdb_id in tmdb_ids_batch}
 

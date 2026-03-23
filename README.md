@@ -1,37 +1,38 @@
-# Podsumowanie co zrobione (Ola) WAŻNE!
-Mamy chyba pobrane wszystkie możliwe dane. Gabi pobrała i połączyła Worldwide Box Office i TMDB (po połączeniu 16822 wiersze). Ja dołączyłam do tego dane z movieLens (po połączeniu 9790 ale tutaj już mamy różne id kompatybilne z innymi plikami. Dla tych ponad 9tys filmów dzięki tmdbId pobrałam informacje o nich przez API z https://developer.themoviedb.org/docs/getting-started. Znajdują się one w **final_tmdb_data.csv** jeszcze z niczym nie łączone. W sumie jest tam 9660 filmów.
-**WAŻNE** na tej stronie z API są chyba wszystkie informacje, jakich potrzebujemy. Jest nawet budżet i przychód (bez podziału na domestic i worldwide, jak to było w przypadku Worldwide Box Office). Jeśli stwierdzimy, że nam to wystarcza i nie musimy łączyć jakoś bardzo z innymi, to można by pobrać z tej strony więcej innych filmów. Musimy tu zdecydować, co pobrać z tej strony przez API, bo nie da się pobrać wszystkich filmów, tylko trzeba tam zadać które chcemy pobierać, ja dawałam po prostu konktretne tmdbId.
-
-Jakie info mamy pobrane przez tmdb:
-'title', 'budget', 'revenue', 'release_date', 'runtime', 'original_language', 'popularity', 'vote_average', 'vote_count', 'genres, 'origin_countries', 'spoken_languages', 'directors', 'writers', 'cast', 'keywords'
-
 # Zawartość
 - data - folder z surowymi danymi
   
-    **merged** - tutaj wrzucone jakieś już połączone ramki danych:
-     **worldWide_imdb_movieLens_merged.csv**- połączone dane ze źródeł:
-      IMDB (https://datasets.imdbws.com/)
-      worldwide-box-office (https://www.worldwideboxoffice.com/)
-      movieLens (https://grouplens.org/datasets/movielens/latest/)
-      Jest tu prawie 10 tysięcy wyników po tych łączeniach
-
-  **tmdb** - tutaj wrzucona csv **final_tmdb_data.csv** pobrana poprzez API ze strony https://developer.themoviedb.org/docs/getting-started
-  Pobrane są te filmy, które łączą się przez tmdbId z filmami w ramce worldWide_imdb_movieLens_merged.csv.
-  **UWAGA** - Pobierało się to przez API ponad godzine, więc polecam po prostu sobie pobrać tą .csv do siebie, nie wysyłam kodu do pobierania tego
-  
+   - imdb - dane z IMDB (https://datasets.imdbws.com/)
+   - movieLens - dane z Movie Lens (https://grouplens.org/datasets/movielens/latest/)
+   - tmdb - dane pobrane ze strony TMDB (https://developer.themoviedb.org/reference/discover-movie)
+   - cpi.xlsx - dane o inflacji w USA w latach 1990-2025 (https://data.bls.gov/timeseries/CUUR0000SA0)
+   - merged - połączone dane
 
     
 - data-acquisition - pozyskiwanie surowych danych
 
-  - wbo_data_loader - skrypt do pobierania danych Worldwide Box Office
-  - wbo_data_merge.ipynb - notatnik, który wczytuje dane IMDB i łączy je z danymi Worldwide Box Office
-  - movielens_data_merge.ipynb - tutaj łączone do IMDB i Worldwide Box Office dane jeszcze z movieLens
+  - wbo_data_loader.py - skrypt do pobierania danych Worldwide Box Office (już nie wykorzystywany)
+  - imdb_data.ipynb - notatnik, który wczytuje dane IMDB i je przetwarza (plik wynikowy to data/merged/imdb.csv oraz directors_named.csv i writers_named.csv)
+  - movieLens.ipynb - przetwarzane i łączone dane z MovieLens (plik wynikowy to data/merged/movieLens.csv)
+  - tmdb_loader_from_movieLens.py - skrypt do pobierania danych ze strony TMDB powiązanych ze źródeł movieLens (filmy - tmdb/tmdb_data_from_movieLens.csv, ludzie - tmdb/tmdb_people_movieLens.csv)
+  - tmdb_loader.py - skrypt do pobierania danych ze strony TMDB, które nie znalazły się w bazie MovieLens - pobieranie po 1000 najpopularniejszych filmów z lat 1990-2025, które nie znalazły się w bazie MovieLens (filmy - tmdb/tmdb_data.csv, ludzie - tmdb/tmdb_people.csv)
+  - data_merge.ipynb - łączenie danych TMDB o filmach i ludziach, movieLens oraz o inflacji, wstępne przetwarzanie (plik wynikowy to merged/merged_data.csv)
 
+Jakie info mamy pobrane przez tmdb:
+'title', 'budget', 'revenue', 'release_date', 'runtime', 'original_language', 'popularity', 'vote_average', 'vote_count', 'genres, 'origin_countries', 'spoken_languages', 'directors', 'writers', 'cast', 'keywords'
+
+Uwagi
+- dane z IMDB pokrywają się z danymi MovieLens oraz TMDB, dlatego nie są używane
+- wybrane zostały filmy z lat 1990-2025
+- dane pieniężne (budget i revenue) zostały ujednolicone pod względem inflacji z 2025 roku
+- w sumie wszstkich filmów jest ponad 74 tys., jednak ze znanym przychodem jest tylko ok 14 tys. ...
 
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``
-2. Uruchom skrypt data_loader.py (pobranie danych ze strony https://www.worldwideboxoffice.com/)
-3. Pobierz dane ze strony https://datasets.imdbws.com/ i umieść nierozpakowane foldery w folderze data/imdb
-4. Uruchom notebook data_aquisition/wbo_data_merge.ipynb - połączenie danych IMDB oraz WorldwideBoxOffice
-5. Pobierz dane ml-latest.zip ze strony https://grouplens.org/datasets/movielens/latest/ i umieść je rozpakowane w folderze data/movieLens
+2. Pobierz dane ml-latest.zip ze strony https://grouplens.org/datasets/movielens/latest/ i umieść je rozpakowane w folderze data/movieLens
+3. Uruchom notebook data_aquisition/movieLens_data.ipynb
+4. Uruchom notebook data_aquisition/data_merge.ipynb (data/merged/merged_data.csv to plik z połączonymi wszystkimi danymi)
+
+### Nie jest konieczne, ale można
+- Pobierz dane ze strony https://datasets.imdbws.com/ i umieść nierozpakowane foldery w folderze data/imdb, aby uruchomić skrypt data_aquisition/imdb_data.ipynb 
+- Uruchomienie skryptów data_aquisition/tmdb_loder.py oraz data_aquisition/tmdb_loder_from_movieLens.py pozwala na pobranie danych TMDB
 
