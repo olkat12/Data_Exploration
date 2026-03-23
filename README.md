@@ -28,9 +28,10 @@ Jakie info mamy pobrane przez tmdb:
 
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``
-2. Pobierz dane ml-latest.zip ze strony https://grouplens.org/datasets/movielens/latest/ i umieść je rozpakowane w folderze data/movieLens
-3. Uruchom notebook data_aquisition/movieLens_data.ipynb
-4. Uruchom notebook data_aquisition/data_merge.ipynb (data/merged/merged_data.csv to plik z połączonymi wszystkimi danymi)
+2. Zainstaluj Git Large File Storage (https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
+3. Pobierz dane ml-latest.zip ze strony https://grouplens.org/datasets/movielens/latest/ i umieść je rozpakowane w folderze data/movieLens
+5. Uruchom notebook data_aquisition/movieLens_data.ipynb
+6. Uruchom notebook data_aquisition/data_merge.ipynb (data/merged/merged_data.csv to plik z połączonymi wszystkimi danymi)
 
 ### Nie jest konieczne, ale można
 - Pobierz dane ze strony https://datasets.imdbws.com/ i umieść nierozpakowane foldery w folderze data/imdb, aby uruchomić skrypt data_aquisition/imdb_data.ipynb 
