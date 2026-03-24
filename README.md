@@ -25,6 +25,7 @@ Jakie info mamy pobrane przez tmdb:
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``
 2. Zainstaluj Git Large File Storage (https://docs.github.com/en/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
+   - jakby pliki pobrały się nieprawidłowo, to w git bash należy wpisać komendę: ``git lfs pull``
 3. Pobierz dane ml-latest.zip ze strony https://grouplens.org/datasets/movielens/latest/ i umieść je rozpakowane w folderze data/movieLens
 5. Uruchom notebook data_aquisition/movieLens_data.ipynb
 6. Uruchom notebook data_aquisition/data_merge.ipynb (data/merged/merged_data.csv to plik z połączonymi wszystkimi danymi)
