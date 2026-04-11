@@ -32,9 +32,9 @@ Jakie info mamy pobrane przez tmdb:
 'title', 'budget', 'revenue', 'release_date', 'runtime', 'original_language', 'popularity', 'vote_average', 'vote_count', 'genres, 'origin_countries', 'spoken_languages', 'directors', 'writers', 'cast', 'keywords'
 
 ### Uwagi
-- wybrane zostały filmy z lat 1950-2025
+- wybrane zostały filmy z lat 1980-2025
 - dane pieniężne (budget i revenue) zostały ujednolicone pod względem inflacji z 2025 roku
-- w sumie wszystkich filmów jest ponad 415 tys., jednak ze znanym przychodem jest tylko ok. 20 tys. ...
+- w sumie wszystkich filmów po usunięciu braków jest 9 tysięcy
 
 # Jak uruchomić
 1. Zainstaluj potrzebne pakiety z pliku requirements.txt ``pip install -r requirements.txt``
@@ -45,6 +45,8 @@ Jakie info mamy pobrane przez tmdb:
 6. Uruchom notebook data_aquisition/data_merge.ipynb (data/merged/merged_data.csv to plik z połączonymi wszystkimi danymi) (może się wykonywać kilka minut) wynikiem jest plik merged_data.csv
 7. Uruchom notebook data-cleaning/cleaning - to plik, w którym robimy czyszczenie na ramce merged_data.csv uzyskanej po puszczeniu notebooka w poprzednim punkcie. Na razie nie skończone - od tego miejsca kontynuować. Wynikami pliki clean_data.csv oraz data_coded.csv
 8. Jeśli chcesz przejść do części z wykresami i analizą danych to uruchom data-visualization/first_data_analysis.ipynb. Tu wykonujemy wykresy i analizy dla ramki wyczyszczonej w punkcie 7 (clean_data.csv)
+9. Aby przejść do dalszej części czyszczenia danych uruchom notatnik NEW_cleaning (trzeba mieć ramkę clean_data.csv u siebie już, bo na tym dalej jest kontynuacja)
+10. Aby przejść do nowych wizualizacji już na najnowszych wyczyszczonych danych uruchom notatnik NEW_visualization.ipynb (trzeba mieć ramkę NEW_clen_data.csv)
 
 ### Nie jest konieczne, ale można
 - Uruchomienie skryptów data_aquisition/tmdb_loder.py oraz data_aquisition/tmdb_loder_from_movieLens.py pozwala na pobranie danych TMDB
