@@ -4,7 +4,10 @@
    - movieLens - dane z Movie Lens (https://grouplens.org/datasets/movielens/latest/)
    - tmdb - dane pobrane ze strony TMDB (https://developer.themoviedb.org/reference/discover-movie)
    - cpi.xlsx - dane o inflacji w USA w latach 1950-2025 (https://data.bls.gov/timeseries/CUUR0000SA0)
-   - merged - połączone dane
+   - merged - połączone dane:
+      - merged_data.csv - po prostu surowe ale już połączone dane, dalej przekazywane do czyszczenia
+      - clean_data.csv ( troche czyszczone dane, używane w notatniku first_data_analysis.ipynb)
+      - **NEW_clean_data.csv** (bazują na clean_data, ale już mają wyrzucone braki w danych, starsze filmy itp. **To jest nasza NAJNOWSZA ramka używana w NEW_visualization.ipynb**)
 
     
 - data-acquisition - pozyskiwanie surowych danych
@@ -16,10 +19,14 @@
   - data_merge.ipynb - łączenie danych TMDB o filmach i ludziach, movieLens oraz o inflacji, wstępne przetwarzanie (plik wynikowy to merged/merged_data.csv)
 
 - data-cleaning - czyszczenie danych
-  - cleaning.ipynb - plik z wstępnym czyszczeniem danych, do kontynuowania
+  - cleaning.ipynb - plik z wstępnym czyszczeniem danych, zakończony już, rezultatem jest /merged/clean_data.csv
+  - **NEW_cleaning.ipynb** - tutaj do kontynuacji. Nasze najnowsze dane czyszczone bez braków, bez starych filmów itp  - wykorzystujemy je w nowych wizualizacjach, **do kontynuowania tutaj** rezultatem jest /merged/NEW_clean_data.csv oraz /merged/data_coded.csv gdzie już kodujemy kolumny 0-1
+
 
 - data-visualization - wizualizacja i analizy
-- first_data_analysis.ipynb - tutaj wykonywane wizualizacje na wyczyszczonych danych
+  - first_data_analysis.ipynb - to stare wizualizacje dla wszystkich danych trochę wyczyszczonych, na ramce clean_data.csv
+  - NEW_visualization.ipynb - tutaj już wizualizacje na ramce NEW_cleaning.ipynb czyli nasze najnowsze, **do kontynuowania tutaj**
+
 
 Jakie info mamy pobrane przez tmdb:
 'title', 'budget', 'revenue', 'release_date', 'runtime', 'original_language', 'popularity', 'vote_average', 'vote_count', 'genres, 'origin_countries', 'spoken_languages', 'directors', 'writers', 'cast', 'keywords'
