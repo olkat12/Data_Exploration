@@ -8,6 +8,7 @@
       - merged_data.csv - po prostu surowe ale już połączone dane, dalej przekazywane do czyszczenia
       - clean_data.csv ( troche czyszczone dane, używane w notatniku first_data_analysis.ipynb)
       - **NEW_clean_data.csv** (bazują na clean_data, ale już mają wyrzucone braki w danych, starsze filmy itp. **To jest nasza NAJNOWSZA ramka używana w NEW_visualization.ipynb**)
+   - top_people - listy najpopularniejeszych aktorów, reżyserów i scenarzystów ze świata kina (imdb, np. https://www.imdb.com/list/ls000031444/?ref_=exp_t_3)
 
     
 - data-acquisition - pozyskiwanie surowych danych
