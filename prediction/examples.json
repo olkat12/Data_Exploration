@@ -1,0 +1,62 @@
+{
+    "frozen": {
+        "name": "Przykład 1",
+        "data": {
+            "runtime": 102, "year": 2013, "quarter": 4, "budget": 150000000,
+            "genres": "children, animation, family, fantasy",
+            "keywords": "love, fantasy_world, relationships, family, original",
+            "original_language": "en", "country": "USA",
+            "director": "Chris Buck", "writer": "Jennifer Lee",
+            "actor1": "Josh Gad", "actor2": "Kristen Bell", "actor3": "Kristen Bell", "actor4": "Idina Menzel", "actor5": "Josh Gad"
+        }
+    },
+    "inception": {
+        "name": "Przykład 2",
+        "data": {
+            "runtime": 148, "year": 2010, "quarter": 3, "budget": 160000000,
+            "genres": "action, sci-fi, adventure",
+            "keywords": "dream, subconscious, heist, original",
+            "original_language": "en", "country": "USA",
+            "director": "Christopher Nolan", "writer": "Christopher Nolan",
+            "actor1": "Leonardo DiCaprio", "actor2": "Joseph Gordon-Levitt", "actor3": "Elliot Page", "actor4": "Tom Hardy", "actor5": "Ken Watanabe"
+        }
+    },
+    "avatar": {
+        "name": "Przykład 3",
+        "data": {
+            "runtime": 162, "year": 2009, "quarter": 4, "budget": 237000000,
+            "genres": "action, adventure, fantasy, sci-fi, war",
+            "keywords": "alien, sci-fi, original, animation",
+            "original_language": "en", "country": "USA",
+            "director": "James Cameron", "writer": "James Cameron",
+            "actor1": "Sam Worthington", "actor2": "Zoe Saldaña",
+            "actor3": "Sigourney Weaver", "actor4": "Stephen Lang", "actor5": "Michelle Rodriguez"
+        }
+    },
+
+    "joker": {
+        "name": "Przykład 4",
+        "data": {
+            "runtime": 122, "year": 2019, "quarter": 4, "budget": 55000000,
+            "genres": "crime, drama, thriller",
+            "keywords": "mental_illness, society, violence, transformation, dc_comics",
+            "original_language": "en", "country": "USA",
+            "director": "Todd Phillips", "writer": "Scott Silver",
+            "actor1": "Joaquin Phoenix", "actor2": "Robert De Niro",
+            "actor3": "Zazie Beetz", "actor4": "Frances Conroy", "actor5": "Brett Cullen"
+        }
+    },
+
+    "interstellar": {
+        "name": "Przykład 5",
+        "data": {
+            "runtime": 169, "year": 2014, "quarter": 4, "budget": 165000000,
+            "genres": "adventure, drama, sci-fi",
+            "keywords": "space_travel, black_hole, future, survival, father_daughter_relationship",
+            "original_language": "en", "country": "USA",
+            "director": "Christopher Nolan", "writer": "Jonathan Nolan",
+            "actor1": "Matthew McConaughey", "actor2": "Anne Hathaway",
+            "actor3": "Jessica Chastain", "actor4": "Michael Caine", "actor5": "Matt Damon"
+        }
+    }
+}

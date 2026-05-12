@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predykcja Filmu</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .container { max-width: 600px; margin: auto; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        .form-group { margin-bottom: 15px; }
+        label { font-weight: bold; display: block; margin-bottom: 5px; }
+        input[type="text"], input[type="number"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { padding: 10px 20px; background-color: #28a745; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #218838; }
+        .result { margin-top: 20px; padding: 15px; background-color: #e9ecef; border-left: 5px solid #007bff; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Formularz Predykcji</h2>
+
+    {% if prediction is not none %}
+        <div class="result">
+            Wynik predykcji: {{ prediction }}
+        </div>
+    {% endif %}
+
+    <form method="POST">
+        <div class="form-group" style="background: #f0f4f8; padding: 15px; border-radius: 5px;">
+            <label>Wybierz gotowy przykład lub wpisz własne dane:</label>
+            <select name="example_choice" onchange="this.form.submit()">
+                <option value="custom" {% if selected_example == 'custom' %}selected{% endif %}>
+                    -- Wpisz własne dane --
+                </option>
+                {% for key, item in examples.items() %}
+                    <option value="{{ key }}" {% if selected_example == key %}selected{% endif %}>
+                        {{ item.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <small style="display:block; margin-top:5px; color: #666;">
+            </small>
+        </div>
+
+        <hr>
+        <div class="form-group">
+            <label>Runtime (czas trwania w min):</label>
+            <input type="number" name="runtime" required
+                   value="{{ form_data['runtime'] if form_data else '102'}}">
+        </div>
+        <div class="form-group">
+            <label>Year (rok):</label>
+            <input type="number" name="year" required
+                   value="{{form_data['year'] if form_data else '2013'}}">
+        </div>
+        <div class="form-group">
+            <label>Quarter (kwartał 1-4):</label>
+            <input type="number" name="quarter" required min="1" max="4"
+                   value="{{form_data['quarter'] if form_data else '4'}}">
+        </div>
+        <div class="form-group">
+            <label>Budget (budżet):</label>
+            <input type="number" name="budget" required
+                   value="{{form_data['budget'] if form_data else '150000000'}}">
+        </div>
+        <div class="form-group">
+            <label>Genres (gatunki po przecinku):</label>
+            <input type="text" name="genres" required
+                   value="{{form_data['genres'] if form_data else 'children, animation, family, fantasy'}}">
+        </div>
+        <div class="form-group">
+            <label>Keywords (słowa kluczowe po przecinku):</label>
+            <input type="text" name="keywords" required
+                   value="{{form_data['keywords'] if form_data else 'love, fantasy_world, relationships, family, original'}}">
+        </div>
+        <div class="form-group">
+            <label>Original Language (język, np. en):</label>
+            <input type="text" name="original_language" required
+                   value="{{form_data['original_language'] if form_data else 'en'}}">
+        </div>
+        <div class="form-group">
+            <label>Country (kraj, np. USA):</label>
+            <input type="text" name="country" required
+                   value="{{form_data['country'] if form_data else 'USA'}}">
+        </div>
+        <div class="form-group">
+            <label>Director (reżyser):</label>
+            <input type="text" name="director" required
+                   value="{{form_data['director'] if form_data else 'Chris Buck'}}">
+        </div>
+        <div class="form-group">
+            <label>Writer (scenarzysta):</label>
+            <input type="text" name="writer" required
+                   value="{{form_data['writer'] if form_data else 'Jennifer Lee'}}">
+        </div>
+
+        <h3>Aktorzy:</h3>
+        <div class="form-group">
+            <label>Actor 1:</label><input type="text" name="actor1" required
+                                          value="{{form_data['actor1'] if form_data else 'Josh Gad'}}">
+            <label>Actor 2:</label><input type="text" name="actor2" required
+                                          value="{{form_data['actor2'] if form_data else 'Kristen Bell'}}">
+            <label>Actor 3:</label><input type="text" name="actor3" required
+                                          value="{{form_data['actor3'] if form_data else 'Kristen Bell'}}">
+            <label>Actor 4:</label><input type="text" name="actor4" required
+                                          value="{{form_data['actor4'] if form_data else 'Idina Menzel'}}">
+            <label>Actor 5:</label><input type="text" name="actor5" required
+                                          value="{{form_data['actor5'] if form_data else 'Josh Gad'}}">
+        </div>
+
+        <button type="submit">Przewiduj</button>
+    </form>
+</div>
+
+</body>
+</html>

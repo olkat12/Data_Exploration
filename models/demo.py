@@ -140,26 +140,49 @@ def add_onehot(df, movie_categories, categories):
 
 
 def add_people_data(df, data):
-    director = DIRECTORS[DIRECTORS['director_name'] == data['director']].iloc[0]
-    df['director_movie_count'] = director['director_movie_count']
-    df['director_max_revenue'] = director['director_max_revenue']
-    df['director_avg_revenue'] = director['director_avg_revenue']
+    director = DIRECTORS[DIRECTORS['director_name'] == data['director']]
+    if not director.empty:
+        director = director.iloc[0]
+        df['director_movie_count'] = director['director_movie_count']
+        df['director_max_revenue'] = director['director_max_revenue']
+        df['director_avg_revenue'] = director['director_avg_revenue']
+    else:
+        df['director_movie_count'] = 0
+        df['director_max_revenue'] = 0
+        df['director_avg_revenue'] = 0
 
-    writer = WRITERS[WRITERS['writer_name'] == data['writer']].iloc[0]
-    df['writer_movie_count'] = writer['writer_movie_count']
-    df['writer_max_revenue'] = writer['writer_max_revenue']
-    df['writer_avg_revenue'] = writer['writer_avg_revenue']
+    writer = WRITERS[WRITERS['writer_name'] == data['writer']]
+    if not writer.empty:
+        writer = writer.iloc[0]
+        df['writer_movie_count'] = writer['writer_movie_count']
+        df['writer_max_revenue'] = writer['writer_max_revenue']
+        df['writer_avg_revenue'] = writer['writer_avg_revenue']
+    else:
+        df['writer_movie_count'] = 0
+        df['writer_max_revenue'] = 0
+        df['writer_avg_revenue'] = 0
 
     for i in range(5):
-        actor = ACTORS[ACTORS['actor_name'] == data['actors'][i]].iloc[0]
-        df[f'actor{i+1}_movie_count'] = actor['actor_movie_count']
-        df[f'actor{i+1}_max_revenue'] = actor['actor_max_revenue']
-        df[f'actor{i+1}_avg_revenue'] = actor['actor_avg_revenue']
-        df[f'actor{i+1}_gender'] = actor['actor_gender']
+        actor = ACTORS[ACTORS['actor_name'] == data['actors'][i]]
+        if not actor.empty:
+            actor = actor.iloc[0]
+            df[f'actor{i+1}_movie_count'] = actor['actor_movie_count']
+            df[f'actor{i+1}_max_revenue'] = actor['actor_max_revenue']
+            df[f'actor{i+1}_avg_revenue'] = actor['actor_avg_revenue']
+            df[f'actor{i+1}_gender'] = actor['actor_gender']
+        else:
+            df[f'actor{i+1}_movie_count'] = 0
+            df[f'actor{i+1}_max_revenue'] = 0
+            df[f'actor{i+1}_avg_revenue'] = 0
+            df[f'actor{i+1}_gender'] = 0
 
-    df['actors_avg_revenue'] = df[[f'actor{i}_avg_revenue' for i in range(1,6)]].mean(axis=1)
-    df['actors_max_revenue'] = df[[f'actor{i}_max_revenue' for i in range(1,6)]].mean(axis=1)
-    df['actors_avg_movie_count'] = df[[f'actor{i}_movie_count' for i in range(1,6)]].mean(axis=1)
+
+    df['actors_avg_revenue'] =\
+        df[[f'actor{i}_avg_revenue' for i in range(1,6) if f'actor{i}_avg_revenue' ]].mean(axis=1)
+    df['actors_max_revenue'] = (
+        df[[f'actor{i}_max_revenue' for i in range(1,6) if f'actor{i}_max_revenue']].mean(axis=1))
+    df['actors_avg_movie_count'] =\
+        df[[f'actor{i}_movie_count' for i in range(1,6)]].mean(axis=1)
     df['female_actors'] = (
             df[[f'actor{i}_gender' for i in range(1,6)]] == 1
     ).sum(axis=1)
@@ -212,9 +235,12 @@ def transform_data(data):
     df = add_people_data(df, data)
     df = add_top_people_data(df, data['actors'], data['director'], data['writer'])
 
+    valid_genres = [g for g in data['genres'] if g in GENRES]
+    valid_keywords = [k for k in data['keywords'] if k in KEYWORDS]
+
     df = add_onehot(df, data['country'], COUNTRIES)
-    df = add_onehot(df, data['genres'], GENRES)
-    df = add_onehot(df, data['keywords'], KEYWORDS)
+    df = add_onehot(df, valid_genres, GENRES)
+    df = add_onehot(df, valid_keywords, KEYWORDS)
 
     df = df[['runtime', 'year', 'budget_adjusted', 'quarter',
        'director_movie_count', 'writer_movie_count', 'actors_avg_movie_count',
@@ -239,9 +265,9 @@ def transform_data(data):
 
     return df
 
+import pickle
+def predict(raw_data, model_path="../models/model_rf.pickle"):
 
-def predict(raw_data, model_path="model_rf.pickle"):
-    import pickle
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
 
