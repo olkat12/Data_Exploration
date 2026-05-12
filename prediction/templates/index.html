@@ -16,7 +16,22 @@
     </style>
 </head>
 <body>
+<datalist id="directors_data">
+    {% for name in directors_list %}
+        <option value="{{ name }}">
+    {% endfor %}
+</datalist>
+<datalist id="writers_data">
+    {% for name in writers_list %}
+        <option value="{{ name }}">
+    {% endfor %}
+</datalist>
 
+<datalist id="actors_data">
+    {% for name in actors_list %}
+        <option value="{{ name }}">
+    {% endfor %}
+</datalist>
 <div class="container">
     <h2>Formularz Predykcji</h2>
 
@@ -86,27 +101,27 @@
         </div>
         <div class="form-group">
             <label>Director (reżyser):</label>
-            <input type="text" name="director" required
+            <input type="text" name="director" list = "directors_data" required
                    value="{{form_data['director'] if form_data else 'Chris Buck'}}">
         </div>
         <div class="form-group">
             <label>Writer (scenarzysta):</label>
-            <input type="text" name="writer" required
+            <input type="text" name="writer" list = "writers_list" required
                    value="{{form_data['writer'] if form_data else 'Jennifer Lee'}}">
         </div>
 
         <h3>Aktorzy:</h3>
         <div class="form-group">
-            <label>Actor 1:</label><input type="text" name="actor1" required
-                                          value="{{form_data['actor1'] if form_data else 'Josh Gad'}}">
-            <label>Actor 2:</label><input type="text" name="actor2" required
-                                          value="{{form_data['actor2'] if form_data else 'Kristen Bell'}}">
-            <label>Actor 3:</label><input type="text" name="actor3" required
-                                          value="{{form_data['actor3'] if form_data else 'Kristen Bell'}}">
-            <label>Actor 4:</label><input type="text" name="actor4" required
-                                          value="{{form_data['actor4'] if form_data else 'Idina Menzel'}}">
-            <label>Actor 5:</label><input type="text" name="actor5" required
-                                          value="{{form_data['actor5'] if form_data else 'Josh Gad'}}">
+            <label>Actor 1:</label><input type="text" name="actor1" list="actors_data"
+                                          required value="{{form_data['actor1'] if form_data else 'Josh Gad'}}">
+            <label>Actor 2:</label><input type="text" name="actor2" list="actors_data"
+                                          required value="{{form_data['actor2'] if form_data else 'Kristen Bell'}}">
+            <label>Actor 3:</label><input type="text" name="actor3" list="actors_data"
+                                          required value="{{form_data['actor3'] if form_data else 'Kristen Bell'}}">
+            <label>Actor 4:</label><input type="text" name="actor4" list="actors_data"
+                                          required value="{{form_data['actor4'] if form_data else 'Idina Menzel'}}">
+            <label>Actor 5:</label><input type="text" name="actor5" list="actors_data"
+                                          required value="{{form_data['actor5'] if form_data else 'Josh Gad'}}">
         </div>
 
         <button type="submit">Przewiduj</button>

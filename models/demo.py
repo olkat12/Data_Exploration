@@ -289,4 +289,5 @@ if __name__ == '__main__':
         "writer": "Jennifer Lee",
         "actors": ["Josh Gad", "Kristen Bell", "Kristen Bell", "Idina Menzel", "Josh Gad"],
     }
-    print(predict(input))
+    print(predict(input).round(2))
+    print(type(predict(input)))
