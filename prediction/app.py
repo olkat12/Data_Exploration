@@ -13,6 +13,8 @@ ALL_ACTORS = sorted(ACTORS['actor_name'].dropna().unique().tolist())
 def index():
     prediction_result = None
     form_data = {}
+    abs_diff = None
+    pct_error = None
 
     selected_example = "custom"
 
@@ -35,6 +37,10 @@ def index():
                 "actors": [form_data[f'actor{i}'] for i in range(1, 6)]
             }
             prediction_result = predict(input_dict,model_path="../models/rf_best8.pickle").round(2)
+            if selected_example in EXAMPLES:
+                true_val = EXAMPLES[selected_example]['true_value']
+                abs_diff = abs(prediction_result - true_val)
+                pct_error = (abs_diff / true_val) * 100
         except Exception as e:
             prediction_result = f"Błąd: {str(e)}"
 
@@ -45,7 +51,9 @@ def index():
                            selected_example=selected_example,
                            directors_list=ALL_DIRECTORS,
                            writers_list=ALL_WRITERS,
-                           actors_list=ALL_ACTORS
+                           actors_list=ALL_ACTORS,
+                           abs_diff=abs_diff,
+                           pct_error=pct_error
                            )
 if __name__ == '__main__':
     app.run(debug=True)

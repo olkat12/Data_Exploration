@@ -1,6 +1,7 @@
 {
     "frozen": {
-        "name": "Przykład 1",
+        "name": "Frozen",
+        "true_value": 1284879663,
         "data": {
             "runtime": 102, "year": 2013, "quarter": 4, "budget": 150000000,
             "genres": "children, animation, family, fantasy",
@@ -11,7 +12,8 @@
         }
     },
     "inception": {
-        "name": "Przykład 2",
+        "name": "Inception",
+        "true_value": 839796627,
         "data": {
             "runtime": 148, "year": 2010, "quarter": 3, "budget": 160000000,
             "genres": "action, sci-fi, adventure",
@@ -22,7 +24,8 @@
         }
     },
     "avatar": {
-        "name": "Przykład 3",
+        "name": "Avatar",
+        "true_value": 2923710708,
         "data": {
             "runtime": 162, "year": 2009, "quarter": 4, "budget": 237000000,
             "genres": "action, adventure, fantasy, sci-fi, war",
@@ -35,7 +38,8 @@
     },
 
     "joker": {
-        "name": "Przykład 4",
+        "name": "Joker",
+      "true_value": 1078958629,
         "data": {
             "runtime": 122, "year": 2019, "quarter": 4, "budget": 55000000,
             "genres": "crime, drama, thriller",
@@ -48,7 +52,8 @@
     },
 
     "interstellar": {
-        "name": "Przykład 5",
+        "name": "Interstellar",
+      "true_value": 774560578,
         "data": {
             "runtime": 169, "year": 2014, "quarter": 4, "budget": 165000000,
             "genres": "adventure, drama, sci-fi",

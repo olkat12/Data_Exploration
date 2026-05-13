@@ -37,9 +37,26 @@
 
     {% if prediction is not none %}
         <div class="result">
-            Wynik predykcji: {{ prediction }}
+            Wynik predykcji: {{ "{:,.0f}".format(prediction) }} USD
         </div>
     {% endif %}
+{% if selected_example in examples and abs_diff is not none %}
+    <div class="metrics" style="margin-top: 15px; padding: 10px; border: 1px dashed #ccc;">
+        <p>Prawdziwa wartość: <strong>{{ "{:,.0f}".format(examples[selected_example]['true_value']) }} USD</strong></p>
+
+        <p>Różnica bezwzględna:
+            <span style="color: #d9534f;">
+                {{ "{:,.0f}".format(abs_diff) }} USD
+            </span>
+        </p>
+
+        <p>Błąd procentowy:
+            <span style="font-weight: bold; color: {% if pct_error < 10 %}#28a745{% else %}#d9534f{% endif %};">
+                {{ pct_error|round(2) }}%
+            </span>
+        </p>
+    </div>
+{% endif %}
 
     <form method="POST">
         <div class="form-group" style="background: #f0f4f8; padding: 15px; border-radius: 5px;">
