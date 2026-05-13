@@ -28,19 +28,13 @@ def index():
         try:
 
             input_dict = {
-                "runtime": int(form_data['runtime']),
                 "year": int(form_data['year']),
-                "quarter": int(form_data['quarter']),
                 "budget": int(form_data['budget']),
-                "genres": [g.strip() for g in form_data['genres'].split(',')],
-                "keywords": [k.strip() for k in form_data['keywords'].split(',')],
-                "original_language": form_data['original_language'],
-                "country": form_data['country'],
                 "director": form_data['director'],
                 "writer": form_data['writer'],
                 "actors": [form_data[f'actor{i}'] for i in range(1, 6)]
             }
-            prediction_result = predict(input_dict).round(2)
+            prediction_result = predict(input_dict,model_path="../models/rf_best8.pickle").round(2)
         except Exception as e:
             prediction_result = f"Błąd: {str(e)}"
 

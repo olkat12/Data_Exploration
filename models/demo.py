@@ -1,83 +1,84 @@
 import pandas as pd
+from sympy.physics.units import years
 
-GENRES = {
-    "action",
-    "adventure",
-    "animation",
-    "children",
-    "comedy",
-    "crime",
-    "documentary",
-    "drama",
-    "family",
-    "fantasy",
-    "film-noir",
-    "history",
-    "horror",
-    "imax",
-    "musical",
-    "mystery",
-    "romance",
-    "sci-fi",
-    "thriller",
-    "tvmovie",
-    "war",
-    "western"
-}
-
-KEYWORDS = {
-    "based_on_book",
-    "original",
-    "action",
-    "violence",
-    "funny",
-    "true_story",
-    "teen",
-    "comedy",
-    "love",
-    "girlie_movie",
-    "horror",
-    "drama",
-    "family",
-    "sequel",
-    "murder",
-    "remake",
-    "woman_director",
-    "animation",
-    "mentor",
-    "romantic",
-    "predictable",
-    "supernatural",
-    "independent_film",
-    "sports",
-    "weird",
-    "friendship",
-    "chase",
-    "relationships",
-    "visually_appealing",
-    "suspense",
-    "romantic_comedy",
-    "new_york_city",
-    "serial_killer",
-    "revenge",
-    "musical",
-    "high_school",
-    "small_town",
-    "superhero",
-    "alien",
-    "biography",
-    "fantasy_world"
-}
-
-COUNTRIES = {
-    "Canada",
-    "France",
-    "Germany",
-    "India",
-    "USA",
-    "UnitedKingdom",
-    "Other"
-}
+# GENRES = {
+#     "action",
+#     "adventure",
+#     "animation",
+#     "children",
+#     "comedy",
+#     "crime",
+#     "documentary",
+#     "drama",
+#     "family",
+#     "fantasy",
+#     "film-noir",
+#     "history",
+#     "horror",
+#     "imax",
+#     "musical",
+#     "mystery",
+#     "romance",
+#     "sci-fi",
+#     "thriller",
+#     "tvmovie",
+#     "war",
+#     "western"
+# }
+#
+# KEYWORDS = {
+#     "based_on_book",
+#     "original",
+#     "action",
+#     "violence",
+#     "funny",
+#     "true_story",
+#     "teen",
+#     "comedy",
+#     "love",
+#     "girlie_movie",
+#     "horror",
+#     "drama",
+#     "family",
+#     "sequel",
+#     "murder",
+#     "remake",
+#     "woman_director",
+#     "animation",
+#     "mentor",
+#     "romantic",
+#     "predictable",
+#     "supernatural",
+#     "independent_film",
+#     "sports",
+#     "weird",
+#     "friendship",
+#     "chase",
+#     "relationships",
+#     "visually_appealing",
+#     "suspense",
+#     "romantic_comedy",
+#     "new_york_city",
+#     "serial_killer",
+#     "revenge",
+#     "musical",
+#     "high_school",
+#     "small_town",
+#     "superhero",
+#     "alien",
+#     "biography",
+#     "fantasy_world"
+# }
+#
+# COUNTRIES = {
+#     "Canada",
+#     "France",
+#     "Germany",
+#     "India",
+#     "USA",
+#     "UnitedKingdom",
+#     "Other"
+# }
 
 people = pd.read_csv('../data/merged/NEW_clean_data.csv')
 for i in range(1, 6):
@@ -130,13 +131,13 @@ def adjust_budget(budget, year, base_year=2025):
     return round(budget * (cpi[base_year] / cpi[year]), 2)
 
 
-def add_onehot(df, movie_categories, categories):
-    for category in categories:
-        if categories == KEYWORDS:
-            df[f"kw_{category}"] = int(category in movie_categories)
-        else:
-            df[category] = int(category in movie_categories)
-    return df
+# def add_onehot(df, movie_categories, categories):
+#     for category in categories:
+#         if categories == KEYWORDS:
+#             df[f"kw_{category}"] = int(category in movie_categories)
+#         else:
+#             df[category] = int(category in movie_categories)
+#     return df
 
 
 def add_people_data(df, data):
@@ -225,48 +226,21 @@ def add_top_people_data(df, actors, director, writer):
 
 def transform_data(data):
     df = pd.DataFrame(
-        columns=['runtime', 'year', 'quarter'],
-        data=[[data['runtime'], data['year'], data['quarter']]],
+        columns=['year'],
+        data=[ data['year']],
     )
     df['budget_adjusted'] = adjust_budget(data['budget'], data['year'])
-    df['lang_en'] = int(data['original_language'] == 'en')
-    df['lang_other'] = int(data['original_language'] != 'en')
 
     df = add_people_data(df, data)
     df = add_top_people_data(df, data['actors'], data['director'], data['writer'])
 
-    valid_genres = [g for g in data['genres'] if g in GENRES]
-    valid_keywords = [k for k in data['keywords'] if k in KEYWORDS]
-
-    df = add_onehot(df, data['country'], COUNTRIES)
-    df = add_onehot(df, valid_genres, GENRES)
-    df = add_onehot(df, valid_keywords, KEYWORDS)
-
-    df = df[['runtime', 'year', 'budget_adjusted', 'quarter',
-       'director_movie_count', 'writer_movie_count', 'actors_avg_movie_count',
-       'writer_avg_revenue', 'writer_max_revenue', 'director_avg_revenue',
-       'director_max_revenue', 'actors_avg_revenue', 'actors_max_revenue',
-       'female_actors', 'top_people_number', 'action', 'adventure',
-       'animation', 'children', 'comedy', 'crime', 'documentary', 'drama',
-       'family', 'fantasy', 'film-noir', 'history', 'horror', 'imax',
-       'musical', 'mystery', 'romance', 'sci-fi', 'thriller', 'tvmovie', 'war',
-       'western', 'lang_en', 'lang_other', 'Canada', 'France', 'Germany',
-       'India', 'Other', 'USA', 'UnitedKingdom', 'kw_based_on_book',
-       'kw_original', 'kw_action', 'kw_violence', 'kw_funny', 'kw_true_story',
-       'kw_teen', 'kw_comedy', 'kw_love', 'kw_girlie_movie', 'kw_horror',
-       'kw_drama', 'kw_family', 'kw_sequel', 'kw_murder', 'kw_remake',
-       'kw_woman_director', 'kw_animation', 'kw_mentor', 'kw_romantic',
-       'kw_predictable', 'kw_supernatural', 'kw_independent_film', 'kw_sports',
-       'kw_weird', 'kw_friendship', 'kw_chase', 'kw_relationships',
-       'kw_visually_appealing', 'kw_suspense', 'kw_romantic_comedy',
-       'kw_new_york_city', 'kw_serial_killer', 'kw_revenge', 'kw_musical',
-       'kw_high_school', 'kw_small_town', 'kw_superhero', 'kw_alien',
-       'kw_biography', 'kw_fantasy_world']]
+    df = df[['actors_avg_revenue','writer_max_revenue','writer_avg_revenue','director_max_revenue',
+             'budget_adjusted','actors_max_revenue','director_avg_revenue','year']]
 
     return df
 
 import pickle
-def predict(raw_data, model_path="../models/model_rf.pickle"):
+def predict(raw_data, model_path="../models/rf_best8.pickle"):
 
     with open(model_path, 'rb') as f:
         model = pickle.load(f)
@@ -277,14 +251,8 @@ def predict(raw_data, model_path="../models/model_rf.pickle"):
 
 if __name__ == '__main__':
     input = {
-        "runtime": 102,
         "year": 2013,
-        "quarter": 4,
         "budget": 150000000,
-        "genres": ["children", "animation", "family", "fantasy"],
-        "keywords": ["love", "fantasy_world", "relationships", "family", "original"],
-        "original_language": "en",
-        "country": "USA",
         "director": "Chris Buck",
         "writer": "Jennifer Lee",
         "actors": ["Josh Gad", "Kristen Bell", "Kristen Bell", "Idina Menzel", "Josh Gad"],

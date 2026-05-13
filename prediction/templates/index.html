@@ -60,44 +60,14 @@
 
         <hr>
         <div class="form-group">
-            <label>Runtime (czas trwania w min):</label>
-            <input type="number" name="runtime" required
-                   value="{{ form_data['runtime'] if form_data else '102'}}">
-        </div>
-        <div class="form-group">
             <label>Year (rok):</label>
             <input type="number" name="year" required
                    value="{{form_data['year'] if form_data else '2013'}}">
         </div>
         <div class="form-group">
-            <label>Quarter (kwartał 1-4):</label>
-            <input type="number" name="quarter" required min="1" max="4"
-                   value="{{form_data['quarter'] if form_data else '4'}}">
-        </div>
-        <div class="form-group">
             <label>Budget (budżet):</label>
             <input type="number" name="budget" required
                    value="{{form_data['budget'] if form_data else '150000000'}}">
-        </div>
-        <div class="form-group">
-            <label>Genres (gatunki po przecinku):</label>
-            <input type="text" name="genres" required
-                   value="{{form_data['genres'] if form_data else 'children, animation, family, fantasy'}}">
-        </div>
-        <div class="form-group">
-            <label>Keywords (słowa kluczowe po przecinku):</label>
-            <input type="text" name="keywords" required
-                   value="{{form_data['keywords'] if form_data else 'love, fantasy_world, relationships, family, original'}}">
-        </div>
-        <div class="form-group">
-            <label>Original Language (język, np. en):</label>
-            <input type="text" name="original_language" required
-                   value="{{form_data['original_language'] if form_data else 'en'}}">
-        </div>
-        <div class="form-group">
-            <label>Country (kraj, np. USA):</label>
-            <input type="text" name="country" required
-                   value="{{form_data['country'] if form_data else 'USA'}}">
         </div>
         <div class="form-group">
             <label>Director (reżyser):</label>
